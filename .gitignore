@@ -5,6 +5,7 @@
 /secrets.yaml
 
 **/__pycache__/**
+/.venv/
 
 /local_*
 .DS_Store
