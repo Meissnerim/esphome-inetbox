@@ -206,6 +206,16 @@ const uint8_t *TrumaiNetBoxApp::lin_multiframe_recieved(const uint8_t *message, 
     // Example:
     // SID<---------PREAMBLE---------->|<---MSG_HEAD---->|tRoom|mo|  |elecA|tWate|elecB|mi|mi|cWate|cRoom|st|err  |  |
     // BB.00.1F.00.1E.00.00.22.FF.FF.FF.54.01.14.33.00.12.00.00.00.00.00.00.00.00.00.00.01.01.CC.0B.6C.0B.00.00.00.00
+    ESP_LOGD(TAG, "StatusFrameHeater  A SID<---------PREAMBLE---------->|<---MSG_HEAD---->|tRoom|mo|  |elecA|tWate|elecB|mi|mi|cWate|cRoom|st|err  |  |");
+    ESP_LOGD(TAG, "StatusFrameHeater  A %s",
+           format_hex_pretty(statusFrame->raw, 41).c_str());
+
+    // ESP_LOGD(TAG, "StatusFrameHeater  H %s",
+    //        format_hex_pretty(statusFrame->raw, sizeof(statusFrame->genericHeader)).c_str());
+    
+    // ESP_LOGD(TAG, "StatusFrameHeater  M %s",
+    //        format_hex_pretty(*(&statusFrame->raw + sizeof(statusFrame->genericHeader)), 41-sizeof(statusFrame->genericHeader)).c_str());
+           
     this->heater_.set_status(statusFrame->heater);
     return response;
   } else if (header->message_type == STATUS_FRAME_AIRCON_MANUAL &&
